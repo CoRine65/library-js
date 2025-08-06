@@ -50,3 +50,8 @@ Project Objectives:
         - Fix: Change const myLibrary = [] to let myLibrary = []
     - ERROR: Uncaught ReferenceError: displayBooks is not defined
         - Fix: Used wrong function call displayBooks() to displayLibrary()
+6. Add a toggle button on each book card for reading
+    - Add an eventlistener to that button
+    - when clicked : find the book in the library and use its data-id
+    - call the book's toggleRead()
+    - re-render the library

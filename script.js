@@ -50,10 +50,23 @@ function displayLibrary() {
             const bookId = e.target.parentElement.getAttribute("data-id");
             removeBook(bookId);
         });
-
         card.appendChild(removeBtn);
+
+        //toggle read button
+        const toggleReadBtn = document.createElement("button");
+        toggleReadBtn.textContent = "Toggle Read";
+        toggleReadBtn.addEventListener("click", (e) => {
+            const bookId = e.target.parentElement.getAttribute("data-id");
+            const book = myLibrary.find(book => book.id === bookId);
+            if (book){
+                book.toggleRead();
+                displayLibrary();
+            }
+        });
+        card.appendChild(toggleReadBtn);
+
         container.appendChild(card);
-    })
+    });
 }
 
     function removeBook(id){
@@ -92,4 +105,4 @@ bookForm.addEventListener("submit", function(event){
 //console.log(myLibrary);
 //addBookToLibrary("The Hobbit", "J.R.R. Tolkien", 310, false);
 //addBookToLibrary("1984", "George Orwell", 328, true);
-displayLibrary();
+//displayLibrary();
