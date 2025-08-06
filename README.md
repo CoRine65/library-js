@@ -34,3 +34,6 @@ Project Objectives:
     - store all books inside an array (myLibrary): like a database
     - a function that takes in data, builds a book, and stores it into the array
     - generate unique identifier using crypto.randomUUID()
+3. Displaying the books onto the webpage
+    - loop through the array and render each book's info onto the webpage
+    - learning to create and insert HTML using the DOM

@@ -23,9 +23,31 @@ function addBookToLibrary( title, author, pages, isRead) {
     myLibrary.push(newBook)
 }
 
+//a function to loop through myLibrary and display the books
+//for each book in the library, create a card and attach it to the page
+function displayLibrary() {
+    const container = document.getElementById("library-container"); //using DOM to get the div created in the HTML
+
+    container.innerHTML = "";
+
+    myLibrary.forEach(book => {
+        const card = document.createElement("div");
+        card.classList.add("book-card");
+
+        card.innerHTML = `
+        <h3> ${book.title}</h3>
+        <p><strong>Author:</strong></p>
+        <p><strong>Pages:</strong> ${book.pages}</p>
+        <p><strong>Read:</strong> ${book.isRead ? "Yes" : "No"}</p>
+        `;
+
+        container.appendChild(card);
+    })
+}
 
 //testing
 addBookToLibrary("The Hobbit", "J.R.R. Tolkien", 310, false);
 addBookToLibrary("1984", "George Orwell", 328, true);
 
 console.log(myLibrary);
+displayLibrary();
