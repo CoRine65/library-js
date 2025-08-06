@@ -29,3 +29,8 @@ Project Objectives:
 
 1. Create Git repository
     - generate: index.html, stylesheet.css, script.js
+2. Buidling the Book Factory:
+    - define a blueprint (book) for each individual book
+    - store all books inside an array (myLibrary): like a database
+    - a function that takes in data, builds a book, and stores it into the array
+    - generate unique identifier using crypto.randomUUID()
