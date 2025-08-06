@@ -43,3 +43,10 @@ Project Objectives:
     - update the DOM when a new book is added
     - preventing default form behavior using event.preventDefaul()
     - ERROR: it was printing duplicate of the test values, rather that the inputed information that is because i had put default values, and so anybook inserted would always be the same value. 
+5. Add a remove button to each book display
+    - removes from the array
+    - removes from the DOM
+    - ERROR: Uncaught TypeError: Assignment to constant variable
+        - Fix: Change const myLibrary = [] to let myLibrary = []
+    - ERROR: Uncaught ReferenceError: displayBooks is not defined
+        - Fix: Used wrong function call displayBooks() to displayLibrary()

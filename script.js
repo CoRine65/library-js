@@ -1,5 +1,5 @@
 //create an empty myLibrary array: holds all the boooks
-const myLibrary = []
+let myLibrary = []
 
 //define a book constructor (using a class for clarity (like ruby))
 class Book {
@@ -27,12 +27,13 @@ function addBookToLibrary( title, author, pages, isRead) {
 //for each book in the library, create a card and attach it to the page
 function displayLibrary() {
     const container = document.getElementById("library-container"); //using DOM to get the div created in the HTML
-
     container.innerHTML = "";
 
     myLibrary.forEach(book => {
         const card = document.createElement("div");
         card.classList.add("book-card");
+        card.setAttribute('data-id', book.id);
+        
 
         card.innerHTML = `
         <h3> ${book.title}</h3>
@@ -41,9 +42,24 @@ function displayLibrary() {
         <p><strong>Read:</strong> ${book.isRead ? "Yes" : "No"}</p>
         `;
 
+        //create and append remove button
+        const removeBtn = document.createElement('button');
+        removeBtn.textContent = "Remove";
+
+        removeBtn.addEventListener("click", (e) => {
+            const bookId = e.target.parentElement.getAttribute("data-id");
+            removeBook(bookId);
+        });
+
+        card.appendChild(removeBtn);
         container.appendChild(card);
     })
 }
+
+    function removeBook(id){
+        myLibrary = myLibrary.filter(book => book.id !== id);
+        displayLibrary();
+    }
 
 
 //adding event listeners 
