@@ -55,3 +55,34 @@ Project Objectives:
     - when clicked : find the book in the library and use its data-id
     - call the book's toggleRead()
     - re-render the library
+
+------------------------
+Final Project Analysis: Library
+
+In this project, we used a Book class to define what a book is and which properties each book object should have — specifically, the title, author, pages, and isRead status. We also included a .toggleRead() method inside the class, since toggling the read status is behavior that directly relates to a specific book instance. This reflects good object-oriented design — putting functionality where it logically belongs.
+
+To store all the books created by the user, we created an empty array called myLibrary, which serves as a simple in-memory database.
+
+Handling Book Creation with a Form
+
+To allow users to add new books, we created an HTML form with inputs for the book’s title, author, number of pages, and read status. The submit button on this form has an event listener attached that:
+- Prevents the default form behavior (so the page doesn’t reload).
+- Collects the input values and assigns them to constants.
+- Calls addBookToLibrary(...) with those constants as arguments. This function:
+- Creates a new Book instance.
+- Pushes it into myLibrary (our database).
+- Calls displayLibrary() to update the UI and show the new book card.
+- Resets the form to clear the input fields after submission.
+It's important to note: while the event listener collects the user’s input for display purposes, it does not directly manage the database — that responsibility lies within the addBookToLibrary function.
+
+Displaying the Library
+
+To show the books visually, we created a displayLibrary() function. It:
+- Loops through every book in myLibrary.
+- Creates a div card element for each book.
+- Sets its innerHTML to show the book's details.
+- Assigns a data-id to help identify which book it is (using the index).
+- Adds a Remove button:
+    - With an event listener that finds the book using the data-id, removes it from the array, and re-renders the library.
+- Adds a Toggle Read button:
+    - With an event listener that finds the correct book, calls .toggleRead() on it, and updates the display.
