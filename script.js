@@ -45,9 +45,35 @@ function displayLibrary() {
     })
 }
 
-//testing
-addBookToLibrary("The Hobbit", "J.R.R. Tolkien", 310, false);
-addBookToLibrary("1984", "George Orwell", 328, true);
 
-console.log(myLibrary);
+//adding event listeners 
+//showing the form when "New Book" is clicked
+const newBookBtn = document.getElementById("new-book-btn");
+const bookForm = document.getElementById("book-form")
+
+newBookBtn.addEventListener("click", () =>{
+    bookForm.style.display = "block";
+})
+
+bookForm.addEventListener("submit", function(event){
+    event.preventDefault();
+    //getting the values from the form
+    const title = document.getElementById("title").value;
+    const author = document.getElementById("author").value;
+    const pages = parseInt(document.getElementById("pages").value);
+    const isRead = document.getElementById("isRead").checked;
+    //testing
+    addBookToLibrary(title, author, pages, isRead);
+    bookForm.reset();
+    bookForm.style.display = "none";
+
+    displayLibrary();
+})
+
+
+
+
+//console.log(myLibrary);
+//addBookToLibrary("The Hobbit", "J.R.R. Tolkien", 310, false);
+//addBookToLibrary("1984", "George Orwell", 328, true);
 displayLibrary();

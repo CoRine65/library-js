@@ -37,3 +37,9 @@ Project Objectives:
 3. Displaying the books onto the webpage
     - loop through the array and render each book's info onto the webpage
     - learning to create and insert HTML using the DOM
+4. Handling HTML Forms in JS
+    - collecting user input from the form fields
+    - adding new book obkects to the existing myLibrary array
+    - update the DOM when a new book is added
+    - preventing default form behavior using event.preventDefaul()
+    - ERROR: it was printing duplicate of the test values, rather that the inputed information that is because i had put default values, and so anybook inserted would always be the same value. 
