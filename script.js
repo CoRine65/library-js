@@ -1,5 +1,3 @@
-//create an empty myLibrary array: holds all the boooks
-let myLibrary = []
 
 //define a book constructor (using a class for clarity (like ruby))
 class Book {
@@ -17,87 +15,103 @@ class Book {
     }
 }
 
-//a function to add a book: it goes outside the class because it is not a book, but rather an action
-function addBookToLibrary( title, author, pages, isRead) {
-    const newBook = new Book(title, author, pages, isRead)
-    myLibrary.push(newBook)
-}
+//defining a library class to hold books: add, remove, and display books
+class Library {
+  constructor() {
+    this.books = [];
+  }
 
-//a function to loop through myLibrary and display the books
-//for each book in the library, create a card and attach it to the page
-function displayLibrary() {
-    const container = document.getElementById("library-container"); //using DOM to get the div created in the HTML
+  addBook(title, author, pages, isRead) {
+    const newBook = new Book(title, author, pages, isRead);
+    this.books.push(newBook);
+  }
+
+  removeBook(id) {
+    this.books = this.books.filter(book => book.id !== id);
+  }
+
+  displayLibrary() {
+    const container = document.getElementById("library-container");
     container.innerHTML = "";
 
-    myLibrary.forEach(book => {
-        const card = document.createElement("div");
-        card.classList.add("book-card");
-        card.setAttribute('data-id', book.id);
-        
+    this.books.forEach(book => {
+      const card = document.createElement("div");
+      card.classList.add("book-card");
+      card.setAttribute("data-id", book.id);
 
-        card.innerHTML = `
-        <h3> ${book.title}</h3>
-        <p><strong>Author:</strong></p>
+      card.innerHTML = `
+        <h3>${book.title}</h3>
+        <p><strong>Author:</strong> ${book.author}</p>
         <p><strong>Pages:</strong> ${book.pages}</p>
         <p><strong>Read:</strong> ${book.isRead ? "Yes" : "No"}</p>
-        `;
+      `;
 
-        //create and append remove button
-        const removeBtn = document.createElement('button');
-        removeBtn.textContent = "Remove";
+      const removeBtn = document.createElement("button");
+      removeBtn.textContent = "Remove";
+      removeBtn.addEventListener("click", (e) => {
+        const bookId = e.target.parentElement.getAttribute("data-id");
+        this.removeBook(bookId);
+        this.displayLibrary();
+      });
+      card.appendChild(removeBtn);
 
-        removeBtn.addEventListener("click", (e) => {
-            const bookId = e.target.parentElement.getAttribute("data-id");
-            removeBook(bookId);
-        });
-        card.appendChild(removeBtn);
+      const toggleReadBtn = document.createElement("button");
+      toggleReadBtn.textContent = "Toggle Read";
+      toggleReadBtn.addEventListener("click", (e) => {
+        const bookId = e.target.parentElement.getAttribute("data-id");
+        const book = this.books.find(book => book.id === bookId);
+        if (book) {
+          book.toggleRead();
+          this.displayLibrary();
+        }
+      });
+      card.appendChild(toggleReadBtn);
 
-        //toggle read button
-        const toggleReadBtn = document.createElement("button");
-        toggleReadBtn.textContent = "Toggle Read";
-        toggleReadBtn.addEventListener("click", (e) => {
-            const bookId = e.target.parentElement.getAttribute("data-id");
-            const book = myLibrary.find(book => book.id === bookId);
-            if (book){
-                book.toggleRead();
-                displayLibrary();
-            }
-        });
-        card.appendChild(toggleReadBtn);
-
-        container.appendChild(card);
+      container.appendChild(card);
     });
+  }
 }
+//create an empty myLibrary array: holds all the boooks
+const myLibrary = new Library();
 
-    function removeBook(id){
-        myLibrary = myLibrary.filter(book => book.id !== id);
-        displayLibrary();
-    }
-
-
-//adding event listeners 
-//showing the form when "New Book" is clicked
+const bookForm = document.getElementById("book-form");
 const newBookBtn = document.getElementById("new-book-btn");
-const bookForm = document.getElementById("book-form")
 
-newBookBtn.addEventListener("click", () =>{
-    bookForm.style.display = "block";
-})
+// Show the form when "New Book" button is clicked
+newBookBtn.addEventListener("click", () => {
+  bookForm.style.display = "block";
+});
 
-bookForm.addEventListener("submit", function(event){
-    event.preventDefault();
-    //getting the values from the form
-    const title = document.getElementById("title").value;
-    const author = document.getElementById("author").value;
-    const pages = parseInt(document.getElementById("pages").value);
-    const isRead = document.getElementById("isRead").checked;
-    //testing
-    addBookToLibrary(title, author, pages, isRead);
-    bookForm.reset();
-    bookForm.style.display = "none";
+// Handle form submission
+bookForm.addEventListener("submit", (event) => {
+  event.preventDefault();
 
-    displayLibrary();
-})
+  // Get the form values
+  const title = document.getElementById("title").value;
+  const author = document.getElementById("author").value;
+  const pages = parseInt(document.getElementById("pages").value);
+  const isRead = document.getElementById("isRead").checked;
+
+  // Add the book to the library instance
+  myLibrary.addBook(title, author, pages, isRead);
+
+  // Clear and hide the form
+  bookForm.reset();
+  bookForm.style.display = "none";
+
+  // Update the displayed library
+  myLibrary.displayLibrary();
+});
+
+
+
+
+
+//a function to add a book: it goes outside the class because it is not a book, but rather an action
+//function addBookToLibrary( title, author, pages, isRead) {
+//    const newBook = new Book(title, author, pages, isRead)
+//    myLibrary.push(newBook)
+//}
 
 
 

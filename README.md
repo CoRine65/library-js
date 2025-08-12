@@ -86,3 +86,10 @@ To show the books visually, we created a displayLibrary() function. It:
     - With an event listener that finds the book using the data-id, removes it from the array, and re-renders the library.
 - Adds a Toggle Read button:
     - With an event listener that finds the correct book, calls .toggleRead() on it, and updates the display.
+
+----- Refactoring classes -----
+08.11.25
+- coming back to rewriting using classes instead.
+
++ what i did not understand: what am i refractor here since i already used a class for my books.
+A: The books are currently stored in an array, therefore we can make a separate Library class to hold the books. 
