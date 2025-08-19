@@ -92,6 +92,12 @@ bookForm.addEventListener("submit", (event) => {
   const pages = parseInt(document.getElementById("pages").value);
   const isRead = document.getElementById("isRead").checked;
 
+  //form validations
+
+  if (!title || !author || !pages){
+    alert( "Please fill in all fields!");
+    return;
+  }
   // Add the book to the library instance
   myLibrary.addBook(title, author, pages, isRead);
 
